@@ -4,10 +4,10 @@ const { parse } = require('querystring');
 export const Router = (routerMap: Map<String, Function>) => {
     return (ctx: createApp.Context) => {
         return new Promise((resolve, rejects) => {
-            function exec() {
+            async function exec() {
                 const controller = routerMap.get(ctx.parsedUrl.pathname);
                 if (controller) {
-                    controller(ctx);
+                    await controller(ctx);
                     ctx.res.statusCode = 200;
                 } else {
                     ctx.res.statusCode = 404;
