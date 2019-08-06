@@ -8,7 +8,7 @@ const port = 3000;
 const app = new createApp.App()
 
 const routerMap:Map<String, Function> = new Map()
-routerMap.set('/article/get-list', articleController.getList)
+routerMap.set('/article/get-75team-ist', articleController.get75teamList)
 
 const crRouter = createRouter.Router(routerMap)
 app.use(crRouter)
