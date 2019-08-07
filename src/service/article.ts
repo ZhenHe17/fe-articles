@@ -4,7 +4,7 @@ import * as cheerio from 'cheerio';
 // https://myapit.weipaitang.com/wechat/v1.0/systemnews/real-news
 export const get75teamList = (ctx: createApp.Context) => {
     return new Promise((resolve, reject) => {
-        function getCurrentArticles(path: String) {
+        function getCurrentArticles(path: string) {
             https
                 .get('https://weekly.75team.com/' + path, (res) => {
                     let data = '';
