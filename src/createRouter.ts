@@ -36,11 +36,9 @@ export class Router {
                     resolve();
                 }
                 try {
-                    console.log(method)
                     if (method === 'post') {
                         let str = '';
                         ctx.req.on('data', (chunk) => {
-                            console.log(chunk)
                             str += chunk.toString();
                         });
                         ctx.req.on('end', () => {

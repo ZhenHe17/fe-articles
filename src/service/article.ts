@@ -19,15 +19,22 @@ export const get75teamList = (ctx: createApp.Context) => {
                             const item = listItems.eq(i);
                             if (item.children('h2').length) {
                                 articleList.push({
-                                    cate: item.children()[0].name,
+                                    cate: item.children('h2').text(),
                                     list: []
                                 })
                             } else {
                                 const title = item.children('h3').text()
                                 const desc = item.children('.desc').text()
+                                const tags = []
+                                const tagNodes = item.children('.meta').children('.tag')
+                                for (let j = 0; j < tagNodes.length; j++) {
+                                    const tag = tagNodes.eq(j).text()
+                                    tags.push(tag)
+                                }
                                 articleList[articleList.length - 1].list.push({
                                     title,
                                     desc,
+                                    tags
                                 })
                             }
                         }
