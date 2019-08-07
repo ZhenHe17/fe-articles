@@ -20,7 +20,7 @@ export class Router {
         delete: new Map<string, Function>()
     };
 
-    public createRouter() {
+    public createRouterMiddleware() {
         const _this = this
         return (ctx: createApp.Context) => {
             return new Promise((resolve, reject) => {

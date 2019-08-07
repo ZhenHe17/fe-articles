@@ -11,4 +11,5 @@ npm run start
 
 ### API
 
-/article/get-75team-ist
+/article/get-75team-list
+/article/get-juejin-list
