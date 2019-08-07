@@ -7,6 +7,7 @@ const crRouter = new createRouter.Router()
 
 crRouter.get('/article/get-75team-list', articleController.get75teamList)
 crRouter.post('/article/get-75team-list', articleController.get75teamList)
+crRouter.get('/article/get-juejin-list', articleController.getJuejinList)
 
 app.use(crRouter.createRouter())
 

@@ -4,3 +4,7 @@ import * as articleService from '../service/article';
 export const get75teamList = (ctx: createApp.Context) => {
     return articleService.get75teamList(ctx)
 };
+
+export const getJuejinList = (ctx: createApp.Context) => {
+    return articleService.getJuejinList(ctx)
+};
