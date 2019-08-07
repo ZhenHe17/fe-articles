@@ -87,7 +87,7 @@ export const getJuejinList = (ctx: createApp.Context) => {
         const bodyQueryStr = {
             operationName: '',
             query: '',
-            variables: { tags: [], category: '5562b415e4b00c57d9b94ac8', first: 20, after: '', order: 'POPULAR' },
+            variables: { category: '5562b415e4b00c57d9b94ac8', first: 20, after: '', order: 'POPULAR' },
             extensions: { query: { id: '653b587c5c7c8a00ddf67fc66f989d42' } }
         };
         const contentStr = JSON.stringify(bodyQueryStr);
@@ -113,7 +113,7 @@ export const getJuejinList = (ctx: createApp.Context) => {
                 res.on('end', () => {
                     data = JSON.parse(data)
                     let list = data.data.articleFeed.items.edges
-                    list = list.map((item)=>{
+                    list = list.map((item: any)=>{
                         item.node.href = item.node.originalUrl
                         return item.node
                     })

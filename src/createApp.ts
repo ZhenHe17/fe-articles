@@ -11,7 +11,7 @@ export interface Context {
 
 export class App {
     middleware: Array<Function> = [];
-    listen(...args) {
+    listen(...args: any[]) {
         const server = http.createServer(this.callback());
         return server.listen(...args);
     }

@@ -6,6 +6,7 @@ interface RouterMap {
     post: Map<string, Function>;
     put: Map<string, Function>;
     delete: Map<string, Function>;
+    [key: string]: Map<string, Function>;
 }
 
 export interface Router {
@@ -13,7 +14,7 @@ export interface Router {
 }
 
 export class Router {
-    routerMap = {
+    routerMap: RouterMap = {
         get: new Map<string, Function>(),
         post: new Map<string, Function>(),
         put: new Map<string, Function>(),
@@ -21,7 +22,7 @@ export class Router {
     };
 
     public createRouterMiddleware() {
-        const _this = this
+        const _this = this;
         return (ctx: createApp.Context) => {
             return new Promise((resolve, reject) => {
                 const method = ctx.req.method.toLowerCase();
