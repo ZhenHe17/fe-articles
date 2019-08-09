@@ -33,6 +33,7 @@ export class Router {
                         ctx.res.statusCode = 200;
                     } else {
                         ctx.res.statusCode = 404;
+                        ctx.result = '404 No Found'
                     }
                     resolve();
                 }
