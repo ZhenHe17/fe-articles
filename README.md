@@ -20,3 +20,5 @@ npm run start
 /article/get-75team-list
 获取掘金前端热门文章
 /article/get-juejin-list
+获取全部文章列表
+/article/get-all-list

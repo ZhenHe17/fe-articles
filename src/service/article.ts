@@ -5,9 +5,10 @@ import * as https from 'https';
 import * as cheerio from 'cheerio';
 import request from '../util/request';
 // https://myapit.weipaitang.com/wechat/v1.0/systemnews/real-news
-export const get75teamList = (ctx: createApp.Context) => {
-    function getCurrentArticles(path: string) {
-        return request('https://weekly.75team.com/' + path, {}, (data: any) => {
+export const get75teamList = async (ctx: createApp.Context) => {
+    async function getCurrentArticles(path: string) {
+        let result: any
+        await request('https://weekly.75team.com/' + path, {}, (data: any) => {
             const $ = cheerio.load(data);
             const listItems = $('ul li');
             const articleList = [];
@@ -31,18 +32,21 @@ export const get75teamList = (ctx: createApp.Context) => {
                     });
                 }
             }
-            ctx.result = articleList;
+            result = articleList;
         });
+        return result
     }
-    return request('https://weekly.75team.com/', {}, (data: any) => {
+    let result: any
+    await request('https://weekly.75team.com/', {}, (data: any) => {
         const $ = cheerio.load(data);
         const links = $('ol.issue-list').find('li a');
         const path = links.eq(0).attr('href');
-        return getCurrentArticles(path);
+        result = getCurrentArticles(path);
     });
+    return result
 };
 
-export const getJuejinList = (ctx: createApp.Context) => {
+export const getJuejinList = async (ctx: createApp.Context) => {
     const option = {
         method: 'POST',
         body: {
@@ -56,12 +60,14 @@ export const getJuejinList = (ctx: createApp.Context) => {
             'X-Agent': 'Juejin/Web'
         }
     };
-    return request('https://web-api.juejin.im/query', option, (data: any) => {
+    let result: any
+    await request('https://web-api.juejin.im/query', option, (data: any) => {
         let list = data.data.articleFeed.items.edges;
         list = list.map((item: any) => {
             item.node.href = item.node.originalUrl;
             return item.node;
         });
-        ctx.result = list;
+        result = list;
     });
+    return result
 };
