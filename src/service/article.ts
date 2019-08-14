@@ -4,6 +4,7 @@ import * as http from 'http';
 import * as https from 'https';
 import * as cheerio from 'cheerio';
 import request from '../util/request';
+import connection from '../connectMysql'
 // https://myapit.weipaitang.com/wechat/v1.0/systemnews/real-news
 export const get75teamList = async (ctx: createApp.Context) => {
     async function getCurrentArticles(path: string) {
@@ -71,3 +72,17 @@ export const getJuejinList = async (ctx: createApp.Context) => {
     });
     return result
 };
+
+export const insertArticles = (tableAndKeyName: string, listValues: Array<Array<any>>) => {
+    const sql = `INSERT INTO ${tableAndKeyName} VALUES ?`;
+    connection.query(sql, [listValues], function (err, result) {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message);
+            return;
+        }
+
+        // console.log(`--------------------------INSERT-${tableAndKeyName}---------------------------`);
+        // console.log('INSERT ID:', result);
+        // console.log('-----------------------------------------------------------------\n\n');
+    });
+}

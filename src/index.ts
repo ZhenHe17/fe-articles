@@ -9,6 +9,7 @@ router.get('/article/get-75team-list', articleController.get75teamList)
 router.post('/article/get-75team-list', articleController.get75teamList)
 router.get('/article/get-juejin-list', articleController.getJuejinList)
 router.get('/article/get-all-list', articleController.getAllList)
+router.get('/article/_query-time', articleController.queryListTime)
 
 app.use(router.createRouterMiddleware())
 

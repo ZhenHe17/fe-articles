@@ -18,7 +18,9 @@
         "typescript": "^3.5.3"
     },
     "dependencies": {
+        "@types/mysql": "^2.15.6",
         "cheerio": "^1.0.0-rc.3",
+        "mysql": "^2.17.1",
         "parseurl": "^1.3.3"
     }
 }
