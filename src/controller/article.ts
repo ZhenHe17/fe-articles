@@ -13,39 +13,36 @@ export const getJuejinList = async (ctx: createApp.Context) => {
     return ctx.result
 };
 
-export const getAllList = async (ctx: createApp.Context) => {
+export const getAllList = async (ctx?: createApp.Context) => {
     const needQueryTableName: Array<string> = []
     const needQuery: Array<any> = []
-    const allTableName: Array<string> = ['75team', 'juejin']
+    const allTableName: Array<any> = [{ name: '75team', service: articleService.get75teamList }, { name: 'juejin', service: articleService.getJuejinList }]
+    console.log(`controller----------------!!!getAllList!!!---------------------`)
     // 查询数据库是否有当天已爬取的记录
-    await Promise.all(allTableName.map(name => SQLService.queryTable(`${name}_article_tbl`))).then((res: any) => {
+    await Promise.all(allTableName.map(item => SQLService.queryTable(`${item.name}_article_tbl`))).then((res: any) => {
         for (let i = 0; i < res.length; i++) {
             const result = res[i];
-            const createTime = result[0].create_date.getTime()
-            const nowTime = new Date().getTime()
-            if (nowTime - 86400000 <= createTime) {
-                ctx.result[allTableName[i]] = result
-            } else {
-                needQueryTableName.push(allTableName[i])
-                switch (allTableName[i]) {
-                    case '75team':
-                        needQuery.push(articleService.get75teamList(ctx))
-                        break;
-                    case 'juejin':
-                        needQuery.push(articleService.getJuejinList(ctx))
-                        break;
+            if (result && result.length) {
+                const createTime = result[0].create_date.getTime()
+                const nowTime = new Date().getTime()
+                if (nowTime - 86400000 <= createTime) {
+                    ctx.result[allTableName[i].name] = result
+                    continue;
                 }
             }
+            needQueryTableName.push(allTableName[i].name)
+            needQuery.push(allTableName[i].service(ctx))
         }
         return ctx.result
     })
     // 没有记录的重新爬取
     if (needQuery.length) {
         await Promise.all(needQuery).then(res => {
-            for (const name of needQueryTableName) {
+            for (let i = 0; i < needQueryTableName.length; i++) {
+                const name = needQueryTableName[i];
                 console.log(`----------------!!!重新查询${name}!!!---------------------`)
-                ctx.result[name] = res[0]
-                const list = res[0].map((item: any) => [
+                ctx.result[name] = res[i]
+                const list = res[i].map((item: any) => [
                     item.title,
                     item.href,
                     new Date(),
@@ -58,13 +55,13 @@ export const getAllList = async (ctx: createApp.Context) => {
 };
 
 export const queryListTime = async (ctx: createApp.Context) => {
-    const result:any = await SQLService.queryTable('juejin_article_tbl')
+    const result: any = await SQLService.queryTable('juejin_article_tbl')
     const createTime = result[0].create_date.getTime()
     const nowTime = new Date().getTime()
     if (nowTime - 86400000 <= createTime) {
         ctx.result = result
         return ctx.result
-    } 
+    }
     console.log(ctx.result[0].create_date.getTime())
     console.log(new Date().getTime())
     return ctx.result
