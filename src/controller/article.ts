@@ -3,15 +3,6 @@ import * as articleService from '../service/article';
 import * as SQLService from '../service/commonSQL';
 import connection from '../connectMysql'
 // https://myapit.weipaitang.com/wechat/v1.0/systemnews/real-news
-export const get75teamList = async (ctx: createApp.Context) => {
-    ctx.result = await articleService.get75teamList(ctx)
-    return ctx.result
-};
-
-export const getJuejinList = async (ctx: createApp.Context) => {
-    ctx.result = await articleService.getJuejinList(ctx)
-    return ctx.result
-};
 
 export const getAllList = async (ctx?: createApp.Context) => {
     const needQueryTableName: Array<string> = []
@@ -24,6 +15,14 @@ export const getAllList = async (ctx?: createApp.Context) => {
         {
             name: 'juejin',
             service: articleService.getJuejinList
+        },
+        {
+            name: 'cnnode',
+            service: articleService.getCnodeList
+        },
+        {
+            name: 'oschina',
+            service: articleService.getOschinaList
         }
     ]
     console.log(`controller----------------!!!getAllList!!!---------------------`)
@@ -59,15 +58,22 @@ export const getAllList = async (ctx?: createApp.Context) => {
     return ctx.result
 };
 
-export const queryListTime = async (ctx: createApp.Context) => {
-    const result: any = await SQLService.queryTable('juejin_article_tbl')
-    const createTime = result[0].create_date.getTime()
-    const nowTime = new Date().getTime()
-    if (nowTime - 86400000 <= createTime) {
-        ctx.result = result
-        return ctx.result
-    }
-    console.log(ctx.result[0].create_date.getTime())
-    console.log(new Date().getTime())
+export const get75teamList = async (ctx: createApp.Context) => {
+    ctx.result = await articleService.get75teamList(ctx)
+    return ctx.result
+};
+
+export const getJuejinList = async (ctx: createApp.Context) => {
+    ctx.result = await articleService.getJuejinList(ctx)
+    return ctx.result
+};
+
+export const getCnodeList = async (ctx: createApp.Context) => {
+    ctx.result = await articleService.getCnodeList(ctx)
+    return ctx.result
+};
+
+export const getOschinaList = async (ctx: createApp.Context) => {
+    ctx.result = await articleService.getOschinaList(ctx)
     return ctx.result
 };

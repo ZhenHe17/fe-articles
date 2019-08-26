@@ -73,6 +73,46 @@ export const getJuejinList = async (ctx: createApp.Context) => {
     return result
 };
 
+export const getCnodeList = async (ctx: createApp.Context) => {
+    let result: any
+    await request('https://cnodejs.org/?tab=share&page=1', {}, (data: any) => {
+        const $ = cheerio.load(data);
+        const listItems = $('.topic_title');
+        const articleList = [];
+        for (let i = 0; i < listItems.length; i++) {
+            const item = listItems.eq(i);
+            const title = item.attr('title');
+            const href = item.attr('href');
+            articleList.push({
+                title,
+                href,
+            });
+        }
+        result = articleList;
+    });
+    return result
+};
+
+export const getOschinaList = async (ctx: createApp.Context) => {
+    let result: any
+    await request('https://www.oschina.net/blog?classification=428612', {}, (data: any) => {
+        const $ = cheerio.load(data);
+        const listItems = $('#newestArticleList .blog-item .header');
+        const articleList = [];
+        for (let i = 0; i < listItems.length; i++) {
+            const item = listItems.eq(i);
+            const title = item.attr('title');
+            const href = item.attr('href');
+            articleList.push({
+                title,
+                href,
+            });
+        }
+        result = articleList;
+    });
+    return result
+};
+
 export const insertArticles = (tableAndKeyName: string, listValues: Array<Array<any>>) => {
     const sql = `INSERT INTO ${tableAndKeyName} VALUES ?`;
     connection.query(sql, [listValues], function (err, result) {
