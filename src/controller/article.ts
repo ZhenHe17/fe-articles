@@ -28,11 +28,11 @@ export const getAllList = async (ctx?: createApp.Context) => {
     ]
     console.log(`controller----------------!!!getAllList!!!---------------------`)
     // 查询数据库是否有当天已爬取的记录
-    await Promise.all(allTableMap.map(item => SQLService.queryTable(`${item.name}_article_tbl`))).then((res: any) => {
+    await Promise.all(allTableMap.map(item => articleService.queryTodayArticles(`${item.name}_article_tbl`))).then((res: any) => {
         for (let i = 0; i < res.length; i++) {
             const result = res[i];
             if (result && result.length) {
-                const createTime = result[0].create_date.getTime()
+                const createTime = result[result.length - 1].create_date.getTime()
                 const nowTime = new Date().getTime()
                 if (nowTime - 86400000 <= createTime) {
                     ctx.result[allTableMap[i].name] = result

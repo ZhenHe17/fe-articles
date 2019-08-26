@@ -86,3 +86,20 @@ export const insertArticles = (tableAndKeyName: string, listValues: Array<Array<
         // console.log('-----------------------------------------------------------------\n\n');
     });
 }
+
+export const queryTodayArticles = (table: string) => {
+    return new Promise((resolve, reject) => {
+        const now = new Date()
+        const sql = `SELECT * FROM ${table} WHERE create_date = '${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}' ORDER BY id`;
+        //查
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log('[SELECT ERROR] - ', err.message);
+                reject(err)
+                return;
+            }
+
+            resolve(result)
+        });
+    })
+}
