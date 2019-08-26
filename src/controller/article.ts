@@ -32,15 +32,11 @@ export const getAllList = async (ctx?: createApp.Context) => {
         for (let i = 0; i < res.length; i++) {
             const result = res[i];
             if (result && result.length) {
-                const createTime = result[result.length - 1].create_date.getTime()
-                const nowTime = new Date().getTime()
-                if (nowTime - 86400000 <= createTime) {
-                    ctx.result[allTableMap[i].name] = result
-                    continue;
-                }
+                ctx.result[allTableMap[i].name] = result
+            } else {
+                needQueryTableName.push(allTableMap[i].name)
+                needQuery.push(allTableMap[i].service(ctx))
             }
-            needQueryTableName.push(allTableMap[i].name)
-            needQuery.push(allTableMap[i].service(ctx))
         }
         return ctx.result
     })
