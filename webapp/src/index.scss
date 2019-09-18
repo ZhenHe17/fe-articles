@@ -1,0 +1,52 @@
+@import './helper.scss';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a{
+  color: $text;
+  text-decoration: none;
+}
+// a:visited{
+//   color: $hint;
+// }
+
+// react-smart-tabs
+.root {
+  .bar__wrapper, .tab__bar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: $theme;
+    color: $ltext;
+  }
+  .bar__wrapper .addButton{
+    display: none;
+  }
+  .tab__bar{
+    li{
+      color: $ltext;
+      transition: all .2s ease;
+      width: 200px;
+    }
+    li.active{
+      width: 200px;
+    }
+    li.active, li:hover{
+      background: $ltext;
+      color: $theme;
+    }
+  }
+}

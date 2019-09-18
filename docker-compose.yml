@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+
+  fe_article_server:
+    build:
+      context: ./server
+    ports:
+     - "7001:7001"
+    depends_on:
+     - db
+    networks:
+     - backend
+
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=article
+      - MYSQL_USER=worker
+      - MYSQL_PASSWORD=wptworker
+      - MYSQL_ROOT_PASSWORD=wptroot
+      - TZ=UTC
+    volumes:
+      - ./db/conf.d:/etc/mysql/conf.d:ro
+      - ./db/logs:/var/log/mysql:rw
+      - ./db/initdb.d:/docker-entrypoint-initdb.d:ro
+    networks:
+     - backend
+
+  nginx:
+    build:
+      context: ./webapp
+    ports: 
+      - "80:80"
+      - "443:443"
+    volumes:
+      # - ./webapp/dist:/usr/share/nginx/html
+      - ./nginx/conf.d.prod:/etc/nginx/conf.d
+      - ./nginx/cert:/etc/nginx/cert
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      # - ./nginx/log/error.log:/var/log/nginx/error.log
+    networks:
+      - backend
+    restart: always
+    container_name: nginx
+
+networks:
+  backend:

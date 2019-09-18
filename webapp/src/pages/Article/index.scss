@@ -1,0 +1,22 @@
+@import '../../helper.scss';
+
+.article-page{
+    color: $text;
+    font-size: 16px;
+    padding-top: 40px;
+    .article-title{
+        font-size: 1.5em;
+        margin: 20px;
+    }
+    .list-content{
+        padding: 20px;
+        a{
+            padding-left: 4px;
+            transition: all .2s ease;
+        }
+    }
+    .list-content a:hover{
+        border-left: 4px solid $theme;
+        color: $theme;
+    }
+}
