@@ -26,7 +26,7 @@
   "scripts": {
     "start": "egg-scripts start --title=egg-server-docker-boilerplate",
     "stop": "egg-scripts stop --title=egg-server-example",
-    "dev": "egg-bin dev",
+    "dev": "EGG_SERVER_ENV=dev egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
