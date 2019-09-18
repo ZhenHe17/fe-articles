@@ -82,7 +82,7 @@ export const getCnodeList = async (ctx: createApp.Context) => {
         for (let i = 0; i < listItems.length; i++) {
             const item = listItems.eq(i);
             const title = item.attr('title');
-            const href = item.attr('href');
+            const href = "https://cnodejs.org" + item.attr('href');
             articleList.push({
                 title,
                 href,
