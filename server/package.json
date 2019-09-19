@@ -7,6 +7,7 @@
     "declarations": true
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "egg": "^2.15.1",
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0"
@@ -26,7 +27,7 @@
   "scripts": {
     "start": "egg-scripts start --title=egg-server-docker-boilerplate",
     "stop": "egg-scripts stop --title=egg-server-example",
-    "dev": "EGG_SERVER_ENV=dev egg-bin dev",
+    "dev": "EGG_SERVER_ENV=local egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",

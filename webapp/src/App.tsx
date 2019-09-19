@@ -5,7 +5,7 @@ import Article from "./pages/Article";
 import axios from 'axios'
 
 const history = createBrowserHistory()
-axios.defaults.baseURL = 'http://0.0.0.0:3000'
+axios.defaults.baseURL = `//${window.location.hostname}:80/api`
 
 const App: React.FC = () => {
   return (
