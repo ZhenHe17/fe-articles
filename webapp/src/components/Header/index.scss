@@ -1,0 +1,42 @@
+@import '../../helper.scss';
+
+$headerHeight: 60px;
+
+.main-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: $pcWidth;
+    background: #FFF;
+    @include common-shadow;
+    .header-container{
+        display: flex;
+        align-items: center;
+        width: $pcWidth;
+        margin: 0 auto;
+        height: $headerHeight;
+        padding: 0 20px;
+        box-sizing: border-box;
+        h1{
+            font-size: 24px;
+            color: $dhint;
+            margin-right: 24px;
+        }
+        .nav-item{
+            display: block;
+            height: $headerHeight;
+            line-height: $headerHeight;
+            padding: 0 5px;
+            margin: 0 10px;
+            &.active{
+                color: $ltheme;
+                border-bottom: 4px solid $ltheme;
+            }
+        }
+    }
+}
+
+.main-header-holder{
+    height: $headerHeight;
+}

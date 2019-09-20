@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios'
-import { ArticleItem, Item } from '../../components/articleItem'
-import { Tab, TabBar } from 'react-smart-tabs';
+import { Link } from "react-router-dom";
+import Header from "../../components/Header"
+import { CommonPageProps } from "../../types/commonInterface"
+import { ArticleItem, Item } from '../../components/ArticleItem'
 import 'react-smart-tabs/dist/bundle.css';
 import './index.scss';
 
-const Article: React.FC = () => {
+const Article: React.FC<CommonPageProps> = ({ match }) => {
   const [data, setData] = React.useState<any>([])
   const [loaded, setLoaded] = React.useState<boolean>(false)
+  const category = match.params.category;
   React.useEffect(() => {
     axios.get('/article/get-all-list').then(res => {
       setData(res.data)
@@ -17,41 +20,27 @@ const Article: React.FC = () => {
 
   return loaded ? (
     <div className="article-page">
-      {/* <h2 className='article-title'>今日精选</h2> */}
-      <TabBar newTab={false}>
-        <Tab id='1' text="掘金">
-          <div className='list-content'>
-            {data.juejin.map((item: Item) => {
-              return <ArticleItem item={item} />
-            })}
-          </div>
-        </Tab>
-        <Tab id='2' text="奇舞周刊">
-          <div className='list-content'>
-            {data['75team'].map((item: Item) => {
-              return <ArticleItem item={item} />
-            })}
-          </div>
-        </Tab>
-        <Tab id='3' text="cnnode">
-          <div className='list-content'>
-            {data.cnnode.map((item: Item) => {
-              return <ArticleItem item={item} />
-            })}
-          </div>
-        </Tab>
-        <Tab id='4' text="oschina">
-          <div className='list-content'>
-            {data.oschina.map((item: Item) => {
-              return <ArticleItem item={item} />
-            })}
-          </div>
-        </Tab>
-      </TabBar>
+      <Header match={match} />
+      <div className="page-content">
+        <div className="container">
+          <Link className={`nav-item ${match.url === '/articles/juejin' && 'active'}`} to='/articles/juejin'>掘金</Link>
+          <Link className={`nav-item ${match.url === '/articles/75team' && 'active'}`} to='/articles/75team'>奇舞周刊</Link>
+          <Link className={`nav-item ${match.url === '/articles/cnnode' && 'active'}`} to='/articles/cnnode'>cnnode</Link>
+          <Link className={`nav-item ${match.url === '/articles/oschina' && 'active'}`} to='/articles/oschina'>oschina</Link>
+        </div>
+        <div className='list-content'>
+          {data[category].map((item: Item) => {
+            return <ArticleItem item={item} key={item.id} />
+          })}
+        </div>
+      </div>
     </div>
   ) : <div className="article-page">
-      加载中。。。
-  </div>;
+      <Header match={match} />
+      <div className="page-content">
+        加载中...
+      </div>
+    </div>;
 }
 
 export default Article;

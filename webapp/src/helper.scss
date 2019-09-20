@@ -2,6 +2,16 @@ $theme: #AB3B3A;
 $ltheme: #D32F2F;
 $lltheme: #FF8A65;
 
-$text: #333;
+$text: #494d55;
 $ltext: #FFF;
 $hint: #999;
+$dhint: #71777c;
+$lhint: #ccc;
+
+$bg: #F4F5F5;
+
+$pcWidth: 1170px;
+
+@mixin common-shadow{
+    box-shadow: 0 0 4px rgba(0,0,0,.5);
+}

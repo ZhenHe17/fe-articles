@@ -1,0 +1,13 @@
+@import '../../helper.scss';
+
+.home-page{
+    color: $text;
+    font-size: 16px;
+    h2{
+        font-size: 30px;
+        line-height: 1.5em;
+        text-align: center;
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+}

@@ -1,10 +1,13 @@
 @import '../../helper.scss';
 
+$headerHeight: 40px;
+
 .article-page{
     color: $text;
     font-size: 16px;
-    padding: 20px;
-    padding-top: 60px;
+    .page-content{
+        padding: 0 20px;
+    }
     .article-title{
         font-size: 1.5em;
         margin: 20px;
@@ -18,5 +21,25 @@
     .list-content a:hover{
         border-left: 4px solid $theme;
         color: $theme;
+    }
+    .container{
+        display: flex;
+        align-items: center;
+        width: $pcWidth;
+        margin: 0 auto 20px;
+        height: $headerHeight;
+        box-sizing: border-box;
+        border-bottom: 1px solid #f1f1f1;
+        .nav-item{
+            display: block;
+            height: $headerHeight;
+            line-height: $headerHeight;
+            padding: 0 5px;
+            margin: 0 10px;
+            &.active{
+                color: $ltheme;
+                // border-bottom: 4px solid $ltheme;
+            }
+        }
     }
 }

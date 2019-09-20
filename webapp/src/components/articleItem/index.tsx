@@ -7,7 +7,8 @@ interface ArticleItemProps {
 
 export interface Item {
   title: string,
-  href: string
+  href: string,
+  id: number,
 }
 
 export const ArticleItem: React.FC<ArticleItemProps> = ({ item }) => {

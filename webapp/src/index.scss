@@ -1,5 +1,9 @@
 @import './helper.scss';
 
+// html, body {
+//   background-color: $bg;
+// }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -17,6 +21,16 @@ code {
 a{
   color: $text;
   text-decoration: none;
+}
+
+img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.page-content{
+  width: $pcWidth;
+  margin: 0 auto;
 }
 // a:visited{
 //   color: $hint;
@@ -49,4 +63,27 @@ a{
       color: $theme;
     }
   }
+}
+
+// 栅格化
+.row {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+
+.row .col {
+  flex: 1;
+}
+
+.row .col-25 {
+  flex: 0 0 25%;
+}
+
+.row .col-33 {
+  flex: 0 0 33.3333%;
+}
+
+.row .col-50 {
+  flex: 0 0 50%;
 }
