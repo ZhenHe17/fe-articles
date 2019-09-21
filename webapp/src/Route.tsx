@@ -3,6 +3,7 @@ import { Router, Route } from 'react-router-dom'
 import { createBrowserHistory } from "history";
 import Article from "./pages/Article";
 import Home from "./pages/Home";
+import Community from "./pages/Community";
 import axios from 'axios'
 
 const history = createBrowserHistory()
@@ -13,6 +14,7 @@ const App: React.FC = () => {
     <div className="root">
       <Router history={history}>
         <Route path="/" exact component={Home} />
+        <Route path="/community" component={Community} />
         <Route path="/articles/:category" component={Article} />
       </Router>
     </div>
