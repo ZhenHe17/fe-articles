@@ -37,3 +37,13 @@ services:
       # - ./nginx/log/error.log:/var/log/nginx/error.log
     restart: always
     container_name: nginx
+  redis:
+    build: ./redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/redis.conf/:/usr/local/etc/redis.conf
+      - ./redis/data:/usr/local/redis/data
+      - ./redis/redis.log:/usr/local/redis/redis.log
+    restart: always
+    container_name: redis

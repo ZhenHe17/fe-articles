@@ -12,7 +12,9 @@ class ArticleController extends Controller {
     const ctx = this.ctx;
     const id = ctx.query.id;
     const article = await ctx.service.article.find(id);
+    // get
     ctx.body = article;
+    ctx.body.foo = await this.app.redis.get('foo');
   }
   async insert() {
     const ctx = this.ctx;
@@ -20,12 +22,18 @@ class ArticleController extends Controller {
     const query_date = new Date();
     try {
       const article = await ctx.service.article.insert({ website_name, query_date });
+      await this.app.redis.set('foo', 'bar');
       ctx.body = article;
     } catch (err) {
       console.log(err);
     }
   }
   async getIndex() {
+    const cache = await this.app.redis.get('indexResult');
+    if (cache) {
+      this.ctx.body = JSON.parse(cache);
+      return false;
+    }
     const [ juejinArticle, jianshuArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.getJianshuList() ]);
     let newestList = juejinArticle.filter(item => {
       const time = new Date(item.createdAt).getTime();
@@ -36,7 +44,9 @@ class ArticleController extends Controller {
     newestList = newestList.concat(jianshuArticle.slice(0, 3));
     const [ juejinWeeklyArticle, teamArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.get75teamList() ]);
     const weeklyList = juejinWeeklyArticle.slice(0, 8).concat(teamArticle).sort(() => Math.random() - 0.5);
-    this.ctx.body = { newestList, weeklyList };
+    const result = { newestList, weeklyList };
+    await this.app.redis.set('indexResult', JSON.stringify(result), 'EX', 3600);
+    this.ctx.body = result;
   }
   async getAllList() {
     const needQueryTableName = [];

@@ -22,4 +22,12 @@ module.exports = {
     // 是否加载到 agent 上，默认关闭
     agent: false,
   },
+  redis: {
+    client: {
+      port: 6379,
+      host: 'redis',
+      password: '',
+      db: 0,
+    },
+  },
 };
