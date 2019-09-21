@@ -37,3 +37,11 @@ CREATE TABLE IF NOT EXISTS `oschina_article_tbl`(
    `create_date` DATE,
    PRIMARY KEY ( `id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `jianshu_article_tbl`(
+   `id` INT UNSIGNED AUTO_INCREMENT,
+   `title` VARCHAR(100) NOT NULL,
+   `href` VARCHAR(100) NOT NULL,
+   `create_date` DATE,
+   PRIMARY KEY ( `id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

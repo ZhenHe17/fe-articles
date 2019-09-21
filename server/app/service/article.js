@@ -57,16 +57,34 @@ class ArticleService extends Service {
       log(err);
     }
   }
-  async getJuejinList() {
+  async getJuejinList(order = 'popular') {
     console.log('getJuejinList service');
-    const option = {
-      method: 'POST',
-      data: {
+    let data;
+    if (order === 'weekly') {
+      data = {
+        operationName: '',
+        query: '',
+        variables: { category: '5562b415e4b00c57d9b94ac8', first: 20, after: '', order: 'WEEKLY_HOTTEST', tags: [] },
+        extensions: { query: { id: '653b587c5c7c8a00ddf67fc66f989d42' } },
+      };
+    } else if (order === 'popular') {
+      data = {
         operationName: '',
         query: '',
         variables: { category: '5562b415e4b00c57d9b94ac8', first: 20, after: '', order: 'POPULAR' },
         extensions: { query: { id: '653b587c5c7c8a00ddf67fc66f989d42' } },
-      },
+      };
+    } else if (order === 'newest') {
+      data = {
+        operationName: '',
+        query: '',
+        variables: { category: '5562b415e4b00c57d9b94ac8', first: 20, after: '', order: 'NEWEST' },
+        extensions: { query: { id: '653b587c5c7c8a00ddf67fc66f989d42' } },
+      };
+    }
+    const option = {
+      method: 'POST',
+      data,
       dataType: 'json',
       headers: {
         'Content-Type': 'application/json',
@@ -81,6 +99,27 @@ class ArticleService extends Service {
         return item.node;
       });
       return list;
+    } catch (err) {
+      log(err);
+    }
+  }
+  async getJianshuList() {
+    console.log('getJianshuList service');
+    try {
+      const data = await this.app.curl('https://www.jianshu.com/c/f489ec955505', { timeout: 30000 });
+      const $ = cheerio.load(data.res.data);
+      const listItems = $('.note-list li .content');
+      const articleList = [];
+      for (let i = 0; i < listItems.length; i++) {
+        const item = listItems.eq(i).children('.title');
+        const title = item.text();
+        const href = 'https://www.jianshu.com' + item.attr('href');
+        articleList.push({
+          title,
+          href,
+        });
+      }
+      return articleList;
     } catch (err) {
       log(err);
     }

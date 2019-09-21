@@ -25,6 +25,19 @@ class ArticleController extends Controller {
       console.log(err);
     }
   }
+  async getIndex() {
+    const [ juejinArticle, jianshuArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.getJianshuList() ]);
+    let newestList = juejinArticle.filter(item => {
+      const time = new Date(item.createdAt).getTime();
+      return this.ctx.now - 86400000 < time;
+    }).sort((a, b) => {
+      return b.hotIndex - a.hotIndex;
+    }).slice(0, 5);
+    newestList = newestList.concat(jianshuArticle.slice(0, 3));
+    const [ juejinWeeklyArticle, teamArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.get75teamList() ]);
+    const weeklyList = juejinWeeklyArticle.slice(0, 8).concat(teamArticle).sort(() => Math.random() - 0.5);
+    this.ctx.body = { newestList, weeklyList };
+  }
   async getAllList() {
     const needQueryTableName = [];
     const needQuery = [];
@@ -45,6 +58,10 @@ class ArticleController extends Controller {
       {
         name: 'oschina',
         service: this.ctx.service.article.getOschinaList.bind(this),
+      },
+      {
+        name: 'jianshu',
+        service: this.ctx.service.article.getJianshuList.bind(this),
       },
     ];
     console.log('controller----------------!!!getAllList!!!---------------------');
@@ -91,8 +108,22 @@ class ArticleController extends Controller {
     }
     return this.ctx.body;
   }
+  async getTodayList() {
+    const juejinArticle = await this.ctx.service.article.getJuejinList();
+    const result = juejinArticle.filter(item => {
+      const time = new Date(item.createdAt).getTime();
+      return this.ctx.now - 86400000 < time;
+    }).sort((a, b) => {
+      return b.hotIndex - a.hotIndex;
+    });
+    this.ctx.body = { juejinArticle, result };
+  }
   async get75teamList() {
     const article = await this.ctx.service.article.get75teamList();
+    this.ctx.body = article;
+  }
+  async getJianshuList() {
+    const article = await this.ctx.service.article.getJianshuList();
     this.ctx.body = article;
   }
   async getJuejinList() {
