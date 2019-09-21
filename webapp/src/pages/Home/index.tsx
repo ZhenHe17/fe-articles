@@ -1,15 +1,36 @@
 import React from 'react';
+import axios from 'axios'
 import Header from "../../components/Header"
 import { CommunityItem, Item } from '../../components/CommunityItem'
+import { IndexItem, Item as IndexItemInterface } from '../../components/IndexItem'
 import { CommonPageProps } from "../../types/commonInterface"
 import './index.scss';
 
 const Home: React.FC<CommonPageProps> = ({ match }) => {
+  const [data, setData] = React.useState<any>({ newestList: [], weeklyList: [] })
+  // const [loaded, setLoaded] = React.useState<boolean>(false)
+  React.useEffect(() => {
+    axios.get('/article/get-index').then(res => {
+      setData(res.data)
+      // setLoaded(true)
+    })
+  }, [])
   return (
     <div className="home-page">
       <Header match={match} />
       <div className="page-content">
-        {/* <h2>今日热点</h2> */}
+        <h2>今日热点</h2>
+        <div className="row">
+          {data.newestList.map((item: IndexItemInterface) => {
+            return <IndexItem className="col-50" item={item} key={item.title} />
+          })}
+        </div>
+        <h2>每周精选</h2>
+        <div className="row">
+          {data.weeklyList.map((item: IndexItemInterface) => {
+            return <IndexItem className="col-50" item={item} key={item.title} />
+          })}
+        </div>
         <h2>社区推荐</h2>
         <div className="row">
           {community.map((item: Item) => {

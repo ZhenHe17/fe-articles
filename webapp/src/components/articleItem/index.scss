@@ -1,6 +1,16 @@
+@import '../../helper.scss';
+
 .article-item{
     display: flex;
     height: 30px;
     align-items: center;
     font-size: 16px;
+    a{
+        padding-left: 4px;
+        transition: all .2s ease;
+    }
+    a:hover{
+        border-left: 4px solid $theme;
+        color: $theme;
+    }
 }

@@ -1,10 +1,12 @@
 @import '../../helper.scss';
 
-$headerHeight: 40px;
+$headerHeight: 50px;
 
 .article-page{
     color: $text;
     font-size: 16px;
+    padding-top: 60px;
+    height: 100%;
     .page-content{
         padding: 0 20px;
     }
@@ -12,17 +14,11 @@ $headerHeight: 40px;
         font-size: 1.5em;
         margin: 20px;
     }
-    .list-content{
-        a{
-            padding-left: 4px;
-            transition: all .2s ease;
-        }
-    }
-    .list-content a:hover{
-        border-left: 4px solid $theme;
-        color: $theme;
-    }
     .container{
+        position: fixed;
+        top: 60px;
+        background: #fff;
+        z-index: 1;
         display: flex;
         align-items: center;
         width: $pcWidth;
@@ -34,7 +30,7 @@ $headerHeight: 40px;
             display: block;
             height: $headerHeight;
             line-height: $headerHeight;
-            padding: 0 5px;
+            padding: 0 10px;
             margin: 0 10px;
             &.active{
                 color: $ltheme;

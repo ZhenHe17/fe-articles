@@ -25,6 +25,7 @@ const Article: React.FC<CommonPageProps> = ({ match }) => {
         <div className="container">
           <Link className={`nav-item ${match.url === '/articles/juejin' && 'active'}`} to='/articles/juejin'>掘金</Link>
           <Link className={`nav-item ${match.url === '/articles/75team' && 'active'}`} to='/articles/75team'>奇舞周刊</Link>
+          <Link className={`nav-item ${match.url === '/articles/jianshu' && 'active'}`} to='/articles/jianshu'>简书</Link>
           <Link className={`nav-item ${match.url === '/articles/cnnode' && 'active'}`} to='/articles/cnnode'>cnnode</Link>
           <Link className={`nav-item ${match.url === '/articles/oschina' && 'active'}`} to='/articles/oschina'>oschina</Link>
         </div>
