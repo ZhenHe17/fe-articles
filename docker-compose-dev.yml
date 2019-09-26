@@ -44,6 +44,5 @@ services:
     volumes:
       - ./redis/redis.conf/:/usr/local/etc/redis.conf
       - ./redis/data:/usr/local/redis/data
-      - ./redis/redis.log:/usr/local/redis/redis.log
     restart: always
     container_name: redis
