@@ -1,4 +1,4 @@
-FROM node:12.10.0-alpine as client
+FROM node:10-alpine as client
 
 RUN mkdir /opt/webapp
 WORKDIR /opt/webapp

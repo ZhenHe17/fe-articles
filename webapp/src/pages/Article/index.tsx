@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header"
 import { CommonPageProps } from "../../types/commonInterface"
 import { ArticleItem, Item } from '../../components/ArticleItem'
-import 'react-smart-tabs/dist/bundle.css';
 import './index.scss';
 
 const Article: React.FC<CommonPageProps> = ({ match }) => {

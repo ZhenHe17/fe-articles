@@ -7,7 +7,7 @@ module.exports = {
     // 单数据库信息配置
     client: {
       // host
-      host: 'localhost',
+      host: 'db',
       // 端口号
       port: '3306',
       // 用户名
@@ -25,7 +25,7 @@ module.exports = {
   redis: {
     client: {
       port: 6379,
-      host: 'localhost',
+      host: 'redis',
       password: '',
       db: 0,
     },
