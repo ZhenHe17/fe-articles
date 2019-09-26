@@ -1,4 +1,4 @@
-FROM node:10-alpine as client
+FROM blairguk/node-sass-alpine:8.11.0 as client
 
 RUN mkdir /opt/webapp
 WORKDIR /opt/webapp
