@@ -77,18 +77,18 @@ class ArticleController extends Controller {
     console.log('controller----------------!!!getAllList!!!---------------------');
     try {
       // 查询数据库是否有当天已爬取的记录
-      await Promise.all(allTableMap.map(item => this.ctx.service.article.queryTodayArticles(`${item.name}_article_tbl`))).then(res => {
-        for (let i = 0; i < res.length; i++) {
-          const result = res[i];
-          if (result && result.length) {
-            this.ctx.body[allTableMap[i].name] = result;
-          } else {
-            needQueryTableName.push(allTableMap[i].name);
-            needQuery.push(allTableMap[i].service);
-          }
+      const res = await this.ctx.service.article.queryTodayArticles();
+      for (let i = 0; i < allTableMap.length; i++) {
+        const articleName = allTableMap[i].name;
+        const result = res.filter(item => item.origin === articleName);
+        if (result && result.length) {
+          console.log('----------------!!!查到!!!---------------------', articleName);
+          this.ctx.body[articleName] = result;
+        } else {
+          needQueryTableName.push(articleName);
+          needQuery.push(allTableMap[i].service);
         }
-        return this.ctx.body;
-      });
+      }
     } catch (err) {
       log(err);
     }
@@ -101,14 +101,15 @@ class ArticleController extends Controller {
             console.log(`----------------!!!重新查询${name}!!!---------------------`);
             this.ctx.body[name] = res[i];
             if (res[i] && Array.isArray(res[i])) {
-              const list = res[i].map(item => {
+              const articleList = res[i].map(item => {
                 return {
                   title: item.title,
                   href: item.href,
                   create_date: new Date(),
+                  origin: name,
                 };
               });
-              this.ctx.service.article.insertArticles(name + '_article_tbl', list);
+              this.ctx.service.article.insertArticles('all_articles', articleList);
             }
           }
         });

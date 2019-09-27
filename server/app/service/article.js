@@ -166,13 +166,11 @@ class ArticleService extends Service {
       log(err);
     }
   }
-  async queryTodayArticles(table) {
+  async queryTodayArticles() {
     try {
       const now = new Date();
-      const result = await this.app.mysql.select(table, {
-        where: { create_date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}` },
-        orders: 'id',
-      });
+      const sql = `SELECT * FROM all_articles WHERE create_date>'${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}'`;
+      const result = await this.app.mysql.query(sql);
       return result;
     } catch (err) {
       log(err);
