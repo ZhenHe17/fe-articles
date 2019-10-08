@@ -8,6 +8,7 @@ module.exports = app => {
   router.get('/', controller.home.index);
   router.get('/article/info', controller.article.info);
   router.get('/article/insert', controller.article.insert);
+  router.post('/article/insert', controller.article.insert);
   router.get('/article/get-index', controller.article.getIndex);
   router.get('/article/get-75team-list', controller.article.get75teamList);
   router.get('/article/get-juejin-list', controller.article.getJuejinList);

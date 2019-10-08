@@ -18,12 +18,18 @@ class ArticleController extends Controller {
   }
   async insert() {
     const ctx = this.ctx;
-    const website_name = ctx.query.name;
-    const query_date = new Date();
+    console.log('----------------!!!ctx.req.body!!!---------------------', ctx.request.body);
     try {
-      const article = await ctx.service.article.insert({ website_name, query_date });
-      await this.app.redis.set('foo', 'bar');
-      ctx.body = article;
+      const { title, href, tag, desc } = ctx.request.body;
+      const article = {
+        title,
+        href,
+        tag,
+        desc,
+        origin: 'recommend',
+        create_date: new Date(),
+      };
+      await this.ctx.service.article.insertArticles('weekly_articles', article);
     } catch (err) {
       console.log(err);
     }
@@ -43,9 +49,8 @@ class ArticleController extends Controller {
     }).slice(0, 5);
     newestList = newestList.concat(jianshuArticle.slice(0, 3));
     const [ juejinWeeklyArticle, teamArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.get75teamList() ]);
-    const weeklyList = juejinWeeklyArticle.slice(0, 8).concat(teamArticle).sort(() => Math.random() - 0.5);
-    const result = { newestList, weeklyList };
-    await this.app.redis.set('indexResult', JSON.stringify(result), 'EX', 3600);
+    const result = { newestList, juejinWeeklyArticle: juejinWeeklyArticle.slice(0, 8), teamArticle };
+    this.app.redis.set('indexResult', JSON.stringify(result), 'EX', 3600);
     this.ctx.body = result;
   }
   async getAllList() {

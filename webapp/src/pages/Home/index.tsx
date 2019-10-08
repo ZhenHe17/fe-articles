@@ -6,11 +6,11 @@ import { CommonPageProps } from "../../types/commonInterface"
 import './index.scss';
 
 const Home: React.FC<CommonPageProps> = ({ match }) => {
-  const [data, setData] = React.useState<any>({ newestList: [], weeklyList: [] })
+  const [data, setData] = React.useState<any>({ newestList: [], juejinWeeklyArticle: [], teamArticle: [] })
   React.useEffect(() => {
     axios.get('/article/get-index').then(res => {
-      if (res.data.weeklyList.length % 2 === 1) {
-        res.data.weeklyList.push({ title: '', href: '' })
+      if (res.data.teamArticle.length % 2 === 1) {
+        res.data.teamArticle.push({ title: '', href: '' })
       }
       setData(res.data)
     })
@@ -19,15 +19,33 @@ const Home: React.FC<CommonPageProps> = ({ match }) => {
     <div className="home-page">
       <Header match={match} />
       <div className="page-content">
-        <h2>今日热点</h2>
+        {
+          data.weeklyList && (
+            <>
+              <h2>奇舞周刊</h2>
+              <div className="row">
+                {data.teamArticle.map((item: IndexItemInterface) => {
+                  return <IndexItem className="col-50" item={item} key={item.title} />
+                })}
+              </div>
+            </>
+          )
+        }
+        <h2>奇舞周刊</h2>
         <div className="row">
-          {data.newestList.map((item: IndexItemInterface) => {
+          {data.teamArticle.map((item: IndexItemInterface) => {
             return <IndexItem className="col-50" item={item} key={item.title} />
           })}
         </div>
-        <h2>每周精选</h2>
+        <h2>掘金每周热门</h2>
         <div className="row">
-          {data.weeklyList.map((item: IndexItemInterface) => {
+          {data.juejinWeeklyArticle.map((item: IndexItemInterface) => {
+            return <IndexItem className="col-50" item={item} key={item.title} />
+          })}
+        </div>
+        <h2>今日热点</h2>
+        <div className="row">
+          {data.newestList.map((item: IndexItemInterface) => {
             return <IndexItem className="col-50" item={item} key={item.title} />
           })}
         </div>
