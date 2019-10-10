@@ -6,10 +6,8 @@ import Review from "./admin-pages/Review";
 import Article from "./pages/Article";
 import Home from "./pages/Home";
 import Community from "./pages/Community";
-import axios from 'axios'
 
 const history = createBrowserHistory()
-axios.defaults.baseURL = `//${window.location.hostname}:80/api`
 
 const App: React.FC = () => {
   return (

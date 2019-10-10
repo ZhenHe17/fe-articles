@@ -18,7 +18,6 @@ class ArticleController extends Controller {
   }
   async insert() {
     const ctx = this.ctx;
-    console.log('----------------!!!ctx.req.body!!!---------------------', ctx.request.body);
     try {
       const { title, href, tag, desc } = ctx.request.body;
       const article = {
@@ -30,6 +29,10 @@ class ArticleController extends Controller {
         create_date: new Date(),
       };
       await this.ctx.service.article.insertArticles('weekly_articles', article);
+      ctx.body = {
+        code: 0,
+        msg: 'OK',
+      };
     } catch (err) {
       console.log(err);
     }
