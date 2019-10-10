@@ -4,6 +4,13 @@
     line-height: 43px;
     padding: 8px 8px;
     border-bottom: 1px solid #eaecef;
+    overflow: hidden;
+    .bg{
+        max-width: 94%;
+        overflow: hidden;/*超出部分隐藏*/
+        text-overflow:ellipsis;/* 超出部分显示省略号 */
+        white-space: nowrap;/*规定段落中的文本不进行换行 */
+    }
     a{
         padding-left: 4px;
         transition: all .2s ease;

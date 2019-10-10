@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ match }) => {
           <Link className={`nav-item ${match.path === '/' && 'active'}`} to='/'>首页</Link>
           <Link className={`nav-item ${match.path === '/community' && 'active'}`} to='/community'>社区推荐</Link>
           <Link className={`nav-item ${match.path === '/articles/:category' && 'active'}`} to='/articles/juejin'>文章汇总</Link>
-          {/* <Link className={`nav-item ${match.path === '/admin/insert' && 'active'}`} to='/admin/insert'>我要投稿</Link> */}
+          <Link className={`nav-item ${match.path === '/recommendArticle' && 'active'}`} to='/recommendArticle'>我要投稿</Link>
         </div>
       </div>
     </>

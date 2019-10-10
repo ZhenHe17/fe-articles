@@ -14,7 +14,7 @@ export interface Item {
 
 export const IndexItem: React.FC<IndexItemProps> = ({ item, className }) => {
   return (
-    <div className={"index-item " + className}>
+    <div className={"index-item " + className} title={item.title}>
       <div className="bg">
         <a href={item.href} rel="noopener noreferrer" target='_blank'>{item.title}</a>
       </div>
