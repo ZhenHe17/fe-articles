@@ -8,6 +8,13 @@ const log = arg => {
   console.log('-!----------------!-');
 };
 class ArticleController extends Controller {
+  async delCache() {
+    this.app.redis.del('indexResult');
+    this.ctx.body = {
+      code: 0,
+      msg: 'Delete cache success',
+    };
+  }
   async info() {
     const ctx = this.ctx;
     const id = ctx.query.id;
@@ -43,7 +50,7 @@ class ArticleController extends Controller {
       this.ctx.body = JSON.parse(cache);
       return false;
     }
-    const [ juejinArticle, jianshuArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.getJianshuList() ]);
+    const [ juejinArticle, jianshuArticle, recommendArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.getJianshuList(), this.ctx.service.article.queryWeeklyArticles() ]);
     let newestList = juejinArticle.filter(item => {
       const time = new Date(item.createdAt).getTime();
       return this.ctx.now - 86400000 < time;
@@ -52,7 +59,7 @@ class ArticleController extends Controller {
     }).slice(0, 5);
     newestList = newestList.concat(jianshuArticle.slice(0, 3));
     const [ juejinWeeklyArticle, teamArticle ] = await Promise.all([ this.ctx.service.article.getJuejinList('newest'), this.ctx.service.article.get75teamList() ]);
-    const result = { newestList, juejinWeeklyArticle: juejinWeeklyArticle.slice(0, 8), teamArticle };
+    const result = { newestList, juejinWeeklyArticle: juejinWeeklyArticle.slice(0, 8), teamArticle, recommendArticle };
     this.app.redis.set('indexResult', JSON.stringify(result), 'EX', 3600);
     this.ctx.body = result;
   }

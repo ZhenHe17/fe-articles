@@ -12,6 +12,9 @@ const Home: React.FC<CommonPageProps> = ({ match }) => {
       if (res.data.teamArticle.length % 2 === 1) {
         res.data.teamArticle.push({ title: '', href: '' })
       }
+      if (res.data.recommendArticle.length % 2 === 1) {
+        res.data.recommendArticle.push({ title: '', href: '' })
+      }
       setData(res.data)
     })
   }, [])
@@ -20,11 +23,11 @@ const Home: React.FC<CommonPageProps> = ({ match }) => {
       <Header match={match} />
       <div className="page-content">
         {
-          data.weeklyList && (
+          data.recommendArticle && !!data.recommendArticle.length && (
             <>
-              <h2>奇舞周刊</h2>
+              <h2>推荐文章</h2>
               <div className="row">
-                {data.teamArticle.map((item: IndexItemInterface) => {
+                {data.recommendArticle.map((item: IndexItemInterface) => {
                   return <IndexItem className="col-50" item={item} key={item.title} />
                 })}
               </div>

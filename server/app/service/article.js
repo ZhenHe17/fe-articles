@@ -176,6 +176,20 @@ class ArticleService extends Service {
       log(err);
     }
   }
+  async queryWeeklyArticles() {
+    try {
+      const result = await this.app.mysql.select('weekly_articles', {
+        where: { review_status: 1 },
+        orders: [[ 'id', 'desc' ]],
+        limit: 10,
+        offset: 0,
+      });
+      log(result);
+      return result;
+    } catch (err) {
+      log(err);
+    }
+  }
   async insertArticles(table, data) {
     try {
       const result = await this.app.mysql.insert(table, data);

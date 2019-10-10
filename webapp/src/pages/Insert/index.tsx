@@ -88,7 +88,7 @@ const InsertPage: React.FC<CommonPageProps> = ({ match, form }) => {
             <Input maxLength={99} onChange={onFormChange('desc')} value={formData.desc} placeholder="请输入文章描述" />
           </Form.Item>
           <Form.Item label="文章标签" {...formItemLayout}>
-            <Input maxLength={99} onChange={onFormChange('tag')} value={formData.tag} placeholder="多个标签用全角逗号隔开" />
+            <Input maxLength={99} onChange={onFormChange('tag')} value={formData.tag} placeholder="多个标签用半角逗号隔开" />
           </Form.Item>
           <Form.Item {...buttonItemLayout}>
             <Button onClick={insertArticle} loading={pending} type="primary">推荐文章</Button>

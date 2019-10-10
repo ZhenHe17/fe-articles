@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `weekly_articles`(
    `tag` VARCHAR(100),
    `desc` VARCHAR(200),
    `origin` VARCHAR(20),
+   `review_status` TINYINT DEFAULT 0,
    `create_date` TIMESTAMP DEFAULT NOW(),
    PRIMARY KEY ( `id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
