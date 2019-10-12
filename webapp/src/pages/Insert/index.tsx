@@ -35,6 +35,18 @@ const InsertPage: React.FC<CommonPageProps> = ({ match, form }) => {
           data: formData
         });
         message.success('推荐文章成功！');
+        setFormData({
+          title: '',
+          href: '',
+          desc: '',
+          tag: '',
+        })
+        form.setFieldsValue({
+          title: '',
+          href: '',
+          desc: '',
+          tag: '',
+        })
       }
       console.log('Received values of form: ', values);
     });

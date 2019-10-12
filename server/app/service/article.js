@@ -176,19 +176,33 @@ class ArticleService extends Service {
       log(err);
     }
   }
-  async queryWeeklyArticles() {
+  async queryWeeklyArticles(review_status, limit = 10) {
+    // review_status 0未审核 1审核通过 2拒绝并不再显示
     try {
-      const result = await this.app.mysql.select('weekly_articles', {
-        where: { review_status: 1 },
+      const queryOption = {
         orders: [[ 'id', 'desc' ]],
-        limit: 10,
+        limit,
         offset: 0,
-      });
-      log(result);
+      };
+      if (review_status === 0 || review_status === 1) {
+        queryOption.where = { review_status };
+      }
+      const result = await this.app.mysql.select('weekly_articles', queryOption);
       return result;
     } catch (err) {
       log(err);
     }
+  }
+  async updateReviewArticles(rows, review_status) {
+    // review_status 0未审核 1审核通过 2拒绝并不再显示
+    const row = rows.map(id => {
+      return {
+        id,
+        review_status,
+      };
+    });
+    const result = await this.app.mysql.updateRows('weekly_articles', row);
+    return result;
   }
   async insertArticles(table, data) {
     try {

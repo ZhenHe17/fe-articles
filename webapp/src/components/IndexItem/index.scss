@@ -1,7 +1,9 @@
 @import '../../helper.scss';
 
 .index-item{
-    line-height: 43px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
     padding: 8px 8px;
     border-bottom: 1px solid #eaecef;
     overflow: hidden;
@@ -16,6 +18,16 @@
         transition: all .2s ease;
         background: #FFF;
         padding-right: 6px;
+    }
+    .item-tag{
+      display: inline-block;
+      margin-right: 6px;
+      background: $theme;
+      color: #FFF;
+      padding: 0 4px;
+      font-size: 12px;
+      height: 20px;
+      border-radius: 2px;
     }
     a:hover{
         border-left: 4px solid $theme;

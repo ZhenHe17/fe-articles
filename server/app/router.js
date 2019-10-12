@@ -17,4 +17,7 @@ module.exports = app => {
   router.get('/article/get-oschina-list', controller.article.getOschinaList);
   router.get('/article/get-all-list', controller.article.getAllList);
   router.get('/article/get-jianshu-list', controller.article.getJianshuList);
+
+  router.get('/admin/review-article', controller.article.getReviewArticleList);
+  router.post('/admin/review-article', controller.article.updateReviewArticleList);
 };
