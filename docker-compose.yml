@@ -34,7 +34,7 @@ services:
     build:
       context: ./webapp
     ports: 
-      - "80:80"
+      - "3030:80"
       - "443:443"
     volumes:
       # - ./webapp/dist:/usr/share/nginx/html

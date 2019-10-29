@@ -77,7 +77,7 @@ const InsertPage: React.FC<CommonPageProps> = ({ match, form }) => {
               rules: [
                 {
                   required: true,
-                  message: 'Please input your E-mail!',
+                  message: '请输入文章标题',
                 },
               ],
             })(<Input maxLength={99} onChange={onFormChange('title')} placeholder="请输入文章标题" />)}
@@ -97,7 +97,14 @@ const InsertPage: React.FC<CommonPageProps> = ({ match, form }) => {
             })(< Input maxLength={199} onChange={onFormChange('href')} placeholder="请输入文章链接" />)}
           </Form.Item>
           <Form.Item label="文章描述" {...formItemLayout}>
-            <Input maxLength={99} onChange={onFormChange('desc')} value={formData.desc} placeholder="请输入文章描述" />
+          {form.getFieldDecorator('desc', {
+            rules: [
+              {
+                required: true,
+                message: '请输入文章描述',
+              },
+            ],
+          })(<Input maxLength={99} onChange={onFormChange('desc')} value={formData.desc} placeholder="请输入文章描述" />)}
           </Form.Item>
           <Form.Item label="文章标签" {...formItemLayout}>
             <Input maxLength={99} onChange={onFormChange('tag')} value={formData.tag} placeholder="多个标签用半角逗号隔开" />

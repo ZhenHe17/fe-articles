@@ -16,7 +16,7 @@ function getCookie(name: string) {
     }
 }
 
-axios.defaults.baseURL = `//${window.location.hostname}:80/api`
+axios.defaults.baseURL = `//${window.location.hostname}:3030/api`
 axios.defaults.headers = {'x-csrf-token': getCookie("csrfToken")}
 ReactDOM.render(<Route />, document.getElementById('root'));
 
