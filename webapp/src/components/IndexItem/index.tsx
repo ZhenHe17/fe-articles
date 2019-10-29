@@ -21,6 +21,8 @@ export const IndexItem: React.FC<IndexItemProps> = ({ item, className }) => {
       <div className="bg">
         <a href={item.href} rel="noopener noreferrer" target='_blank'>{item.title}</a>
         <br />
+        <span className="desc">{item.desc}</span>
+        <br />
         {tagArr.map(tag => <span className='item-tag'>{tag}</span>)}
       </div>
     </div>
