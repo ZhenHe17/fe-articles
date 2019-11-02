@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import 'minireset.css';
-import Route from './Route';
+import Route, {publicPath} from './Route';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios'
 
@@ -16,7 +16,7 @@ function getCookie(name: string) {
     }
 }
 
-axios.defaults.baseURL = `//${window.location.hostname}:3030/api`
+axios.defaults.baseURL = `//${window.location.hostname}:${window.location.port}${publicPath}/api`
 axios.defaults.headers = {'x-csrf-token': getCookie("csrfToken")}
 ReactDOM.render(<Route />, document.getElementById('root'));
 
