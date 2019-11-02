@@ -1,10 +1,31 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { publicPath } from "../../Route";
 import './index.scss';
 
 interface HeaderProps {
   match: any
 }
+
+const navList = [
+  {
+    path: '/',
+    name: '首页'
+  },
+  {
+    path: '/community',
+    name: '社区推荐'
+  },
+  {
+    path: '/articles/:category',
+    link: '/articles/juejin',
+    name: '文章汇总'
+  },
+  {
+    path: '/recommendArticle',
+    name: '我要投稿'
+  },
+]
 
 const Header: React.FC<HeaderProps> = ({ match }) => {
   return (
@@ -13,10 +34,11 @@ const Header: React.FC<HeaderProps> = ({ match }) => {
       <div className="main-header">
         <div className="header-container">
           <h1>前端微热点</h1>
-          <Link className={`nav-item ${match.path === '/' && 'active'}`} to='/'>首页</Link>
-          <Link className={`nav-item ${match.path === '/community' && 'active'}`} to='/community'>社区推荐</Link>
-          <Link className={`nav-item ${match.path === '/articles/:category' && 'active'}`} to='/articles/juejin'>文章汇总</Link>
-          <Link className={`nav-item ${match.path === '/recommendArticle' && 'active'}`} to='/recommendArticle'>我要投稿</Link>
+          {navList.map(nav => {
+            const path = publicPath + nav.path
+            const link = publicPath + (nav.link || nav.path)
+            return <Link className={`nav-item ${match.path === path && 'active'}`} to={link}>{nav.name}</Link>
+          })}
         </div>
       </div>
     </>

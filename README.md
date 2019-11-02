@@ -10,9 +10,9 @@ docker-compose -f docker-compose-dev.yml up
 
 nginx proxy:
 
-webapp: http://localhost:3000/ => http://localhost/
+webapp: http://localhost:3000/ => http://localhost:3030/
 
-api: http://localhost:7001/ => http://localhost/api/
+api: http://localhost:7001/ => http://localhost:3030/api/
 
 ### Deploy
 
@@ -20,9 +20,9 @@ api: http://localhost:7001/ => http://localhost/api/
 docker-compose up
 ```
 
-webapp: http://localhost/
+webapp: http://localhost:3030/front-tech/
 
-api: http://localhost/api/
+api: http://localhost:3030/api/
 
 ## API
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route } from 'react-router-dom'
+import { Router, Switch, Route, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from "history";
 import InsertPage from "./pages/Insert";
 import Review from "./admin-pages/Review";
@@ -8,16 +8,22 @@ import Home from "./pages/Home";
 import Community from "./pages/Community";
 
 const history = createBrowserHistory()
+export const publicPath = '/front-tech'
 
 const App: React.FC = () => {
   return (
     <div className="root">
       <Router history={history}>
-        <Route path="/" exact component={Home} />
-        <Route path="/community" component={Community} />
-        <Route path="/articles/:category" component={Article} />
-        <Route path="/recommendArticle" component={InsertPage} />
-        <Route path="/admin/review" component={Review} />
+        <Switch>
+          <Route path={`${publicPath}/`} exact component={Home} />
+          <Route path={`${publicPath}/community`} component={Community} />
+          <Route path={`${publicPath}/articles/:category`} component={Article} />
+          <Route path={`${publicPath}/recommendArticle`} component={InsertPage} />
+          <Route path={`${publicPath}/admin/review`} component={Review} />
+          <Route exact path="/">
+            <Redirect to={`${publicPath}/`} />
+          </Route>
+        </Switch>
       </Router>
     </div>
   );

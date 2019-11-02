@@ -52,7 +52,6 @@ services:
     depends_on: [ dockerhost ]
     ports: 
       - "3030:80"
-      - "443:443"
     volumes:
       # - ./webapp/dist:/usr/share/nginx/html
       - ./nginx/conf.d.dev:/etc/nginx/conf.d

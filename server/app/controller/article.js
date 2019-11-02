@@ -65,7 +65,7 @@ class ArticleController extends Controller {
       return b.hotIndex - a.hotIndex;
     }).slice(0, 5);
     newestList = newestList.concat(jianshuArticle.slice(0, 3));
-    const result = { newestList, juejinWeeklyArticle: juejinWeeklyArticle.slice(0, 8), teamArticle, recommendArticle };
+    const result = { newestList, juejinWeeklyArticle: juejinWeeklyArticle.slice(0, 8), teamArticle, recommendArticle: recommendArticle || [] };
     this.app.redis.set('indexResult', JSON.stringify(result), 'EX', 3600);
     this.ctx.body = result;
   }
