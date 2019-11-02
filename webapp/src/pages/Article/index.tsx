@@ -1,10 +1,34 @@
 import React from 'react';
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import { publicPath } from "../../Route";
 import Header from "../../components/Header"
 import { CommonPageProps } from "../../types/commonInterface"
 import { ArticleItem, Item } from '../../components/ArticleItem'
 import './index.scss';
+
+const navList = [
+  {
+    path: '/articles/juejin',
+    name: '掘金'
+  },
+  {
+    path: '/articles/75team',
+    name: '奇舞周刊'
+  },
+  {
+    path: '/articles/jianshu',
+    name: '简书'
+  },
+  {
+    path: '/articles/cnnode',
+    name: 'cnnode'
+  },
+  {
+    path: '/articles/oschina',
+    name: 'oschina'
+  },
+]
 
 const Article: React.FC<CommonPageProps> = ({ match }) => {
   const [data, setData] = React.useState<any>([])
@@ -22,11 +46,10 @@ const Article: React.FC<CommonPageProps> = ({ match }) => {
       <Header match={match} />
       <div className="page-content">
         <div className="container">
-          <Link className={`nav-item ${match.url === '/articles/juejin' && 'active'}`} to='/articles/juejin'>掘金</Link>
-          <Link className={`nav-item ${match.url === '/articles/75team' && 'active'}`} to='/articles/75team'>奇舞周刊</Link>
-          <Link className={`nav-item ${match.url === '/articles/jianshu' && 'active'}`} to='/articles/jianshu'>简书</Link>
-          <Link className={`nav-item ${match.url === '/articles/cnnode' && 'active'}`} to='/articles/cnnode'>cnnode</Link>
-          <Link className={`nav-item ${match.url === '/articles/oschina' && 'active'}`} to='/articles/oschina'>oschina</Link>
+          {navList.map(nav => {
+            const path = publicPath + nav.path
+            return <Link className={`nav-item ${match.url === path && 'active'}`} to={path}>{nav.name}</Link>
+          })}
         </div>
         <div className='list-content'>
           {data[category].map((item: Item) => {
