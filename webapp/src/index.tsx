@@ -17,7 +17,14 @@ function getCookie(name: string) {
 }
 
 axios.defaults.baseURL = `//${window.location.hostname}:${window.location.port}${publicPath}/api`
-axios.defaults.headers = {'x-csrf-token': getCookie("csrfToken")}
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+  config.headers['x-csrf-token'] = getCookie("csrfToken");
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+// axios.defaults.headers = {'x-csrf-token': getCookie("csrfToken")}
 ReactDOM.render(<Route />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
