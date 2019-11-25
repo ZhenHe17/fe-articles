@@ -10,21 +10,40 @@ const columns = [
   {
     title: '待审核文章',
     dataIndex: 'title',
-  }
+  },
+  {
+    title: '文章描述',
+    dataIndex: 'desc',
+  },
+  {
+    title: '文章链接',
+    dataIndex: 'href',
+    render: (text: any) => {
+      return <a target="_blank" rel="noopener noreferrer" className="table-link" href={text}>查看文章</a>;
+    }
+  },
+  {
+    title: '文章标签',
+    dataIndex: 'tag',
+  },
+  {
+    title: '推荐人',
+    dataIndex: 'referrer',
+  },
 ];
 
 const InsertPage: React.FC<CommonPageProps> = ({ match }) => {
-  const [data, setData] = React.useState<any>({ reviewArticle: [], recommendArticle: [] })
+  const [data, setData] = React.useState<any>([])
   const [rows, setRows] = React.useState<Array<any>>([])
   const getData = React.useCallback(()=>{
-    return axios.get('/admin/review-article').then(res => {
+    return axios.get('recommend-article/get-review-article').then(res => {
       setData(res.data)
     })
   }, [])
   const updateStatus = React.useCallback((status: number) => {
     return axios({
       method: 'post',
-      url: '/admin/review-article',
+      url: 'recommend-article/update-status-article',
       data: { rows, status }
     });
   }, [rows])
@@ -55,7 +74,7 @@ const InsertPage: React.FC<CommonPageProps> = ({ match }) => {
           <Button onClick={pass} type="primary">审核通过</Button>
           <Button onClick={ignore} type="danger">不再显示</Button>
         </div>
-        <Table rowSelection={rowSelection} columns={columns} dataSource={data.reviewArticle} />
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
         {/* {
           data.recommendArticle && !!data.recommendArticle.length && (
             <>

@@ -2,29 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import 'minireset.css';
+import 'animate.css';
 import Route, {publicPath} from './Route';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios'
 
-function getCookie(name: string) {
-    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    arr = document.cookie.match(reg)
-    if (arr) {
-        return unescape(arr[2]);
-    } else {
-        return null;
-    }
-}
-
 axios.defaults.baseURL = `//${window.location.hostname}:${window.location.port}${publicPath}/api`
-// Add a request interceptor
-axios.interceptors.request.use(function (config) {
-  config.headers['x-csrf-token'] = getCookie("csrfToken");
-  return config;
-}, function (error) {
-  return Promise.reject(error);
-});
-// axios.defaults.headers = {'x-csrf-token': getCookie("csrfToken")}
+
 ReactDOM.render(<Route />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

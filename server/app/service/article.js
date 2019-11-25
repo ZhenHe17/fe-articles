@@ -169,7 +169,7 @@ class ArticleService extends Service {
   async queryTodayArticles() {
     try {
       const now = new Date();
-      const sql = `SELECT * FROM all_articles WHERE create_date>'${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}'`;
+      const sql = `SELECT * FROM community_articles WHERE create_date>'${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}'`;
       const result = await this.app.mysql.query(sql);
       return result;
     } catch (err) {
@@ -187,7 +187,7 @@ class ArticleService extends Service {
       if (review_status === 0 || review_status === 1) {
         queryOption.where = { review_status };
       }
-      const result = await this.app.mysql.select('weekly_articles', queryOption);
+      const result = await this.app.mysql.select('recommend_articles', queryOption);
       return result;
     } catch (err) {
       log(err);
@@ -201,7 +201,7 @@ class ArticleService extends Service {
         review_status,
       };
     });
-    const result = await this.app.mysql.updateRows('weekly_articles', row);
+    const result = await this.app.mysql.updateRows('recommend_articles', row);
     return result;
   }
   async insertArticles(table, data) {

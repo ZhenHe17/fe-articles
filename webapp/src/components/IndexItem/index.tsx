@@ -16,13 +16,15 @@ export interface Item {
 
 export const IndexItem: React.FC<IndexItemProps> = ({ item, className }) => {
   const tagArr = item.tag ? item.tag.split(',') : [];
+  function handleClick() {
+    window.open(item.href, "_blank");
+  }
   return (
-    <div className={"index-item " + className} title={item.title}>
+    <div className={"index-item " + className} title={item.title} onClick={handleClick}>
       <div className="bg">
-        <a href={item.href} rel="noopener noreferrer" target='_blank'>{item.title}</a>
-        <br />
-        <span className="desc">{item.desc}</span>
-        <br />
+        <div  className="title">{item.title}</div>
+        {item.desc && <span className="desc">{item.desc}</span>}
+        {tagArr && !!tagArr.length && <br />}
         {tagArr.map(tag => <span className='item-tag'>{tag}</span>)}
       </div>
     </div>

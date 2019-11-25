@@ -15,7 +15,7 @@ export interface Item {
 
 export const CommunityItem: React.FC<CommunityItemProps> = ({ item }) => {
   return (
-    <a className="community-item col-25" href={item.href} rel="noopener noreferrer" target='_blank'>
+    <a className="community-item col-25 col-sm-100" href={item.href} rel="noopener noreferrer" target='_blank'>
       <div className="container">
         <div className="img-container" style={{ background: item.bg }}>
           <img className="img" src={item.img} alt="" />

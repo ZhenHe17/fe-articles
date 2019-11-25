@@ -1,43 +1,90 @@
 @import '../../helper.scss';
 
 $headerHeight: 60px;
+$headerHeightSM: 50px;
 
-.main-header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-width: $pcWidth;
-    background: #FFF;
-    z-index: 10;
-    @include common-shadow;
-    .header-container{
-        display: flex;
-        align-items: center;
-        width: $pcWidth;
-        margin: 0 auto;
-        height: $headerHeight;
-        padding: 0 20px;
-        box-sizing: border-box;
-        h1{
-            font-size: 24px;
-            color: $dhint;
-            margin-right: 24px;
-        }
-        .nav-item{
-            display: block;
-            height: $headerHeight;
-            line-height: $headerHeight;
-            padding: 0 5px;
-            margin: 0 10px;
-            &.active{
-                color: $ltheme;
-                border-bottom: 4px solid $ltheme;
-            }
-        }
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  // min-width: $pcWidth;
+  background: #FFF;
+  z-index: 10;
+  @include common-shadow;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    max-width: $pcWidth;
+    margin: 0 auto;
+    height: $headerHeight;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    .nav-list{
+      display: flex;
+      align-items: center;
     }
+
+    .title {
+      font-size: $XLFS;
+      color: $dhint;
+      margin-right: 24px;
+    }
+
+    .nav-item {
+      display: block;
+      height: $headerHeight;
+      line-height: $headerHeight;
+      padding: 0 5px;
+      margin: 0 10px;
+
+      &.active {
+        color: $ltheme;
+        border-bottom: 4px solid $ltheme;
+      }
+    }
+
+    .admin-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30px;
+      height: 30px;
+      z-index: 1;
+      cursor: unset;
+    }
+  }
 }
 
-.main-header-holder{
-    height: $headerHeight;
+.main-header-holder {
+  height: $headerHeight;
+}
+
+@media (max-width: 1024px) {
+  .main-header{
+    .header-container {
+      padding: 0 20px;
+      height: $headerHeightSM;
+      .title {
+        display: none;
+      }
+      .nav-item {
+        height: $headerHeightSM;
+        line-height: $headerHeightSM;
+        padding: 0 5px;
+        margin: 0 7px;
+      }
+      .nav-list a:first-of-type{
+        margin-left: 0;
+      }
+      .admin-link {
+        display: none;
+      }
+    }
+  }
+  .main-header-holder {
+    height: $headerHeightSM;
+  }
 }

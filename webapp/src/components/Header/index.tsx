@@ -17,11 +17,6 @@ const navList = [
     name: '社区推荐'
   },
   {
-    path: '/articles/:category',
-    link: '/articles/juejin',
-    name: '文章汇总'
-  },
-  {
     path: '/recommendArticle',
     name: '我要投稿'
   },
@@ -33,12 +28,15 @@ const Header: React.FC<HeaderProps> = ({ match }) => {
       <div className="main-header-holder" />
       <div className="main-header">
         <div className="header-container">
-          <h1>前端微热点</h1>
-          {navList.map(nav => {
-            const path = publicPath + nav.path
-            const link = publicPath + (nav.link || nav.path)
-            return <Link className={`nav-item ${match.path === path && 'active'}`} to={link}>{nav.name}</Link>
-          })}
+          <Link className='title' to={publicPath + '/'}>微周刊</Link>
+          <Link className='admin-link' to={publicPath + '/admin/review'} />
+          <div className="nav-list">
+            {navList.map(nav => {
+              const path = publicPath + nav.path
+              const link = publicPath + nav.path
+              return <Link className={`nav-item ${match.path === path && 'active'}`} to={link}>{nav.name}</Link>
+            })}
+          </div>
         </div>
       </div>
     </>

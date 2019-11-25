@@ -3,6 +3,9 @@
 // html, body {
 //   background-color: $bg;
 // }
+html, body {
+  font-size: 16px;
+}
 .root {
   h1, h2, h3, h4, h5, h6 {
     color: $text;
@@ -14,6 +17,13 @@
   }
   a:hover {
     color: $ltheme;
+  }
+  h2{
+    font-size: $XLFS;
+    padding: 40px 20px 20px;
+    text-align: center;
+    line-height: 1.5em;
+    font-weight: bold;
   }
 }
 
@@ -42,7 +52,8 @@ img{
 }
 
 .page-content{
-  width: $pcWidth;
+  max-width: $pcWidth;
+  position: relative;
   margin: 0 auto;
 }
 // a:visited{
@@ -76,6 +87,10 @@ img{
       color: $theme;
     }
   }
+  .table-link, .table-link:hover{
+    color: $theme;
+    text-decoration: underline;
+  }
 }
 
 // 栅格化
@@ -89,14 +104,75 @@ img{
   flex: 1;
 }
 
-.row .col-25 {
+.col-10 {
   flex: 0 0 25%;
 }
 
-.row .col-33 {
+.col-20 {
+  flex: 0 0 25%;
+}
+
+.col-25 {
+  flex: 0 0 25%;
+}
+
+.col-33 {
   flex: 0 0 33.3333%;
 }
 
-.row .col-50 {
+.col-50 {
   flex: 0 0 50%;
+}
+
+.col-100 {
+  flex: 0 0 100%;
+}
+
+.pc-hide{
+  display: none;
+}
+
+.mobile-hide{
+  display: block;
+}
+
+.pr{
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  html, body, .root {
+    font-size: 14px;
+  }
+  .col-sm-10 {
+    flex: 0 0 25%;
+  }
+  
+  .col-sm-20 {
+    flex: 0 0 25%;
+  }
+  
+  .col-sm-25 {
+    flex: 0 0 25%;
+  }
+  
+  .col-sm-33 {
+    flex: 0 0 33.3333%;
+  }
+  
+  .col-sm-50 {
+    flex: 0 0 50%;
+  }
+  
+  .col-sm-100 {
+    flex: 0 0 100%;
+  }
+
+  .pc-hide{
+    display: block;
+  }
+
+  .mobile-hide{
+    display: none;
+  }
 }

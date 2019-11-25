@@ -31,7 +31,7 @@ const InsertPage: React.FC<CommonPageProps> = ({ match, form }) => {
       if (!err) {
         await axios({
           method: 'post',
-          url: '/article/insert',
+          url: '/recommend-article/recommend',
           data: formData
         });
         message.success('推荐文章成功！');
@@ -40,12 +40,14 @@ const InsertPage: React.FC<CommonPageProps> = ({ match, form }) => {
           href: '',
           desc: '',
           tag: '',
+          referrer: '',
         })
         form.setFieldsValue({
           title: '',
           href: '',
           desc: '',
           tag: '',
+          referrer: '',
         })
       }
       console.log('Received values of form: ', values);
@@ -108,6 +110,16 @@ const InsertPage: React.FC<CommonPageProps> = ({ match, form }) => {
           </Form.Item>
           <Form.Item label="文章标签" {...formItemLayout}>
             <Input maxLength={99} onChange={onFormChange('tag')} value={formData.tag} placeholder="多个标签用半角逗号隔开" />
+          </Form.Item>
+          <Form.Item label="推荐人" {...formItemLayout}>
+          {form.getFieldDecorator('referrer', {
+            rules: [
+              {
+                required: true,
+                message: '大侠还未留下姓名',
+              },
+            ],
+          })(<Input maxLength={99} onChange={onFormChange('referrer')} value={formData.referrer} placeholder="请大侠留下姓名" />)}
           </Form.Item>
           <Form.Item {...buttonItemLayout}>
             <Button onClick={insertArticle} loading={pending} type="primary">推荐文章</Button>

@@ -23,7 +23,8 @@ module.exports = appInfo => {
   };
   config.security = {
     csrf: {
-      headerName: 'x-csrf-token', // 自定义请求头
+      // headerName: 'x-csrf-token', // 自定义请求头
+      enable: false, // 自定义请求头
     },
   };
   return {

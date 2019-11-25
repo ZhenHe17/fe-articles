@@ -26,16 +26,17 @@ class ArticleController extends Controller {
   async insert() {
     const ctx = this.ctx;
     try {
-      const { title, href, tag, desc } = ctx.request.body;
+      const { title, href, tag, desc, referrer } = ctx.request.body;
       const article = {
         title,
         href,
         tag,
         desc,
+        referrer,
         origin: 'recommend',
         create_date: new Date(),
       };
-      await this.ctx.service.article.insertArticles('weekly_articles', article);
+      await this.ctx.service.article.insertArticles('recommend_articles', article);
       ctx.body = {
         code: 0,
         msg: 'OK',
@@ -128,9 +129,13 @@ class ArticleController extends Controller {
                   href: item.href,
                   create_date: new Date(),
                   origin: name,
+                  tag: item.tag || '',
+                  category: item.category || '',
+                  type: '',
+                  desc: item.desc || '',
                 };
               });
-              this.ctx.service.article.insertArticles('all_articles', articleList);
+              this.ctx.service.article.insertArticles('community_articles', articleList);
             }
           }
         });

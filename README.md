@@ -4,6 +4,15 @@
 
 ### Development
 
+开发环境使用了文件映射，首次启动需要在本地安装好依赖
+``` bash
+cd nest-server
+npm i
+cd webapp
+npm i
+```
+
+然后启动docker
 ``` bash
 docker-compose -f docker-compose-dev.yml up
 ```
@@ -26,17 +35,8 @@ api: http://localhost:3030/api/
 
 ## API
 
-获取最新一期奇舞周刊文章
-/api/article/get-75team-list
+获取推荐文章
+http://localhost:3030/front-tech/api/recommend-article
 
-获取掘金前端热门文章
-/api/article/get-juejin-list
-
-获取cnnode分享板块
-/api/article/get-cnnode-list
-
-获取oschina前端最新博客
-/api/article/get-oschina-list
-
-获取全部文章列表
-/api/article/get-all-list
+爬取社区文章
+http://localhost:3030/front-tech/api/community-article
