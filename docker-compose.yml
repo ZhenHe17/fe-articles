@@ -10,6 +10,9 @@ services:
     depends_on:
      - db
     #  - redis
+    volumes:
+      - ./nest-server:/usr/src/app
+      - my_nest_node_modules:/usr/src/app/node_modules
     networks:
      - backend
 
@@ -72,3 +75,5 @@ services:
 
 networks:
   backend:
+volumes:
+  my_nest_node_modules:

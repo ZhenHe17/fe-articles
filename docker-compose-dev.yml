@@ -25,6 +25,7 @@ services:
     #  - redis
     volumes:
      - ./nest-server:/usr/src/app
+     - my_nest_node_modules:/usr/src/app/node_modules
     networks:
      - dev
   webapp:
@@ -35,6 +36,7 @@ services:
      - "3000:3000"
     volumes:
      - ./webapp:/opt/webapp
+     - my_webapp_node_modules:/opt/webapp/node_modules
     networks:
      - dev
   db:
@@ -89,3 +91,6 @@ services:
   #     - dev
 networks:
   dev:
+volumes:
+  my_nest_node_modules:
+  my_webapp_node_modules:

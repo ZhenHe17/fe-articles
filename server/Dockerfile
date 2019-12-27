@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 
 COPY ./package.json /usr/src/app/
 
-RUN npm install --production --registry=https://registry.npm.taobao.org
+RUN npm install --registry=https://registry.npm.taobao.org
 
 COPY . /usr/src/app
 COPY wait-for-it.sh /

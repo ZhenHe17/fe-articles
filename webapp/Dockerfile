@@ -1,9 +1,9 @@
-FROM blairguk/node-sass-alpine:8.11.0 as client
+FROM node as client
 
 RUN mkdir /opt/webapp
 WORKDIR /opt/webapp
 COPY ./package.json .
-RUN npm install --production --registry=https://registry.npm.taobao.org
+RUN npm install --registry=https://registry.npm.taobao.org
 COPY . .
 
 # CMD npm run start

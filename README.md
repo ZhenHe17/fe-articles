@@ -4,18 +4,11 @@
 
 ### Development
 
-开发环境使用了文件映射，首次启动需要在本地安装好依赖
-``` bash
-cd nest-server
-npm i
-cd webapp
-npm i
-```
-
-然后启动docker
 ``` bash
 docker-compose -f docker-compose-dev.yml up
 ```
+
+访问：http://localhost:3030/
 
 nginx proxy:
 
