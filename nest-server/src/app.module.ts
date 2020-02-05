@@ -11,7 +11,7 @@ import { RecommendArticleModule } from './recommend-article/recommend-article.mo
       host: 'db',
       port: 3306,
       username: 'root',
-      password: 'wptroot',
+      password: 'root',
       database: 'article',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,

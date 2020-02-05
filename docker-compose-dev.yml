@@ -47,8 +47,8 @@ services:
     environment:
       - MYSQL_DATABASE=article
       - MYSQL_USER=worker
-      - MYSQL_PASSWORD=wptworker
-      - MYSQL_ROOT_PASSWORD=wptroot
+      - MYSQL_PASSWORD=worker
+      - MYSQL_ROOT_PASSWORD=root
       - TZ=UTC
     volumes:
       - ./db/conf.d:/etc/mysql/conf.d:ro

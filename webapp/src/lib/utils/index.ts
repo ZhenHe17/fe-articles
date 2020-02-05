@@ -1,7 +1,6 @@
 /**
  * 分割url search key value，返回decode后的[key, value]
  *
- * @exports WPT/Util/splitSearchKeyValue
  * @param {String} [str=''] query
  * @returns {Array}
  */
@@ -16,7 +15,6 @@ function splitSearchKeyValue(str = '') {
 /**
  * 从url上获取query对象
  *
- * @exports WPT/Util/query
  * @param {String} [url=window.location.href] url
  * @returns {Object}
  */

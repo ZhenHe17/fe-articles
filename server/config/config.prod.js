@@ -13,7 +13,7 @@ module.exports = {
       // 用户名
       user: 'root',
       // 密码
-      password: 'wptroot',
+      password: 'root',
       // 数据库名
       database: 'article',
     },

@@ -60,7 +60,7 @@ const Home: React.FC<CommonPageProps> = ({ match, history }) => {
   const renderEditionNum = React.useCallback((totalEdition: number) => {
     const result: React.ReactElement[] = []
     for (let index = 1; index <= totalEdition; index++) {
-      result.push(<div className={`edition-item col-100 ${index === edition && 'active'}`} onClick={handleClickEdition(index)}>微周刊第{index}期</div>)
+      result.push(<div className={`edition-item col-100 ${index === edition && 'active'}`} onClick={handleClickEdition(index)}>周刊第{index}期</div>)
     }
     return result
   }, [handleClickEdition, edition])
@@ -90,7 +90,7 @@ const Home: React.FC<CommonPageProps> = ({ match, history }) => {
               <div className="row">
                 <div className="search-box">
                   <input onKeyDown={handleKeyDown} value={search} onChange={ e =>{ setSearch(e.target.value) }} className="search-input" placeholder="搜索想看的文章" type="text"/>
-                  <img onClick={handleSearch} src="https://cdn.weipaitang.com/static/20191122a8be0246-04dd-024604dd-61fc-fee0c26a61e9-W32H32" alt="搜索" className="search-img" />
+                  <img onClick={handleSearch} src="" alt="搜索" className="search-img" />
                 </div>
                 {renderEditionNum(data.totalEdition)}
               </div>
@@ -111,7 +111,7 @@ const Home: React.FC<CommonPageProps> = ({ match, history }) => {
                 </div>
               ) : <h2>没有搜索到相关文章</h2>) : (data.articleList && !!data.articleList.length && (
                 <div className="article-wrapper">
-                  <h2>微周刊第{edition || data.totalEdition}期</h2>
+                  <h2>周刊第{edition || data.totalEdition}期</h2>
                   <div className="article-list">
                     <div className="row">
                       {data.articleList.map((item: IndexItemInterface, index: number) => {

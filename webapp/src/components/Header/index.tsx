@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ match }) => {
       <div className="main-header-holder" />
       <div className="main-header">
         <div className="header-container">
-          <Link className='title' to={publicPath + '/'}>微周刊</Link>
+          <Link className='title' to={publicPath + '/'}>周刊</Link>
           <Link className='admin-link' to={publicPath + '/admin/review'} />
           <div className="nav-list">
             {navList.map(nav => {
