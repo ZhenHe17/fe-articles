@@ -1,9 +1,9 @@
-FROM node as client
+FROM node:14-alpine as client
 
 RUN mkdir /opt/webapp
 WORKDIR /opt/webapp
 COPY ./package.json .
-RUN npm install --registry=https://registry.npm.taobao.org
+RUN npm install --registry=https://registry.npmmirror.com
 COPY . .
 
 # CMD npm run start
