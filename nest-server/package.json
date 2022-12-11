@@ -21,7 +21,7 @@
   "dependencies": {
     "@nestjs/common": "6.9.0",
     "@nestjs/core": "6.9.0",
-    "@nestjs/platform-express": "6.9.0",
+    "@nestjs/platform-express": "9.2.1",
     "@nestjs/typeorm": "6.2.0",
     "@types/cheerio": "^0.22.14",
     "cheerio": "^1.0.0-rc.3",
